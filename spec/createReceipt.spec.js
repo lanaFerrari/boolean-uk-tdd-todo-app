@@ -23,6 +23,8 @@
         ))
 */
 
+const createReceipt = require("../src/createReceipt")
+
 describe("Create Ticket", ()=>{
     it("returns receipt string", () => {
         // 2.1. Setup: setup variables that will be used in tests(`Inputs` from domain model)
@@ -31,5 +33,21 @@ describe("Create Ticket", ()=>{
         const result = createReceipt(basket)
         // 2.3. Verify: check if the test call result meets expected Output.
         expect(result).toEqual(`phone | 300 | 4`)
+    })
+        it("returns receipt string", () => {
+        // 2.1. Setup: setup variables that will be used in tests(`Inputs` from domain model)
+        const basket = [{name: "phone", price: 300, quantity: 4}, {name: "pho", price: 30, quantity: 2}]
+        // 2.2. Execute: call the test function on the required src code variable
+        const result = createReceipt(basket)
+        // 2.3. Verify: check if the test call result meets expected Output.
+        expect(result).toEqual(`phone | 300 | 4pho | 30 | 2`)
+    })
+          it("returns message if basket is empty", () => {
+        // 2.1. Setup: setup variables that will be used in tests(`Inputs` from domain model)
+        const basket = []
+        // 2.2. Execute: call the test function on the required src code variable
+        const result = createReceipt(basket)
+        // 2.3. Verify: check if the test call result meets expected Output.
+        expect(result).toEqual(``)
     })
 })
